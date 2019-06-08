@@ -5,12 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>git merge command - 子铭 の blog</title>
+    <title>主干网络 Aligned Xception - 子铭 の blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="zim,"> 
-    <meta name="description" content="如何将git master分支内容同步到子分支123456789101112//all of the operations following are in `dev branch`1.//firs,"> 
+    <meta name="description" content="XceptionXception paper
+
+https://blog.csdn.net/u014380165/article/details/75142710
+
+depthwise separa,"> 
     <meta name="author" content="ziming"> 
     <link rel="alternative" href="atom.xml" title="子铭 の blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -35,7 +39,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;" data-url="http://cvcv.me"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">git merge command</h3>
+    <h3 class="subtitle">主干网络 Aligned Xception</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -53,16 +57,28 @@
     <div class="section">
         <div class="article">
     <div class="main">
-        <h1 class="title">git merge command</h1>
+        <h1 class="title">主干网络 Aligned Xception</h1>
         <div class="stuff">
-            <span>六月 07, 2019</span>
+            <span>六月 08, 2019</span>
             
-  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/github/">github</a></li></ul>
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/主干网络/">主干网络</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/目标检测/">目标检测</a></li></ul>
 
 
         </div>
         <div class="content markdown">
-            <h2 id="如何将git-master分支内容同步到子分支"><a href="#如何将git-master分支内容同步到子分支" class="headerlink" title="如何将git master分支内容同步到子分支"></a>如何将git master分支内容同步到子分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//all of the operations following are <span class="keyword">in</span> `dev branch`</span><br><span class="line"></span><br><span class="line">1.</span><br><span class="line">//first, checkout the status of <span class="string">'dev branch'</span>.</span><br><span class="line">git checkout dev</span><br><span class="line">//<span class="keyword">if</span> your dev branch have some thing to push or pull, finish it</span><br><span class="line">2.</span><br><span class="line">//merge the `master branch` to `dev branch`</span><br><span class="line">git merge master</span><br><span class="line">3.</span><br><span class="line">// push the changed `dev branch` to github</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+            <h2 id="Xception"><a href="#Xception" class="headerlink" title="Xception"></a>Xception</h2><p><a href="https://arxiv.org/abs/1610.02357" target="_blank" rel="noopener">Xception paper</a></p>
+<p><img src="https://img-blog.csdn.net/20170715083812048?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxNDM4MDE2NQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="è¿éåå¾çæè¿°"></p>
+<p><a href="https://blog.csdn.net/u014380165/article/details/75142710" target="_blank" rel="noopener">https://blog.csdn.net/u014380165/article/details/75142710</a></p>
+<p><img src="https://img-blog.csdn.net/20170715083646403?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxNDM4MDE2NQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="è¿éåå¾çæè¿°"></p>
+<p><code>depthwise separable convolution</code>  two steps</p>
+<ul>
+<li>channel-wise  spatial conv   the fig. (b)</li>
+<li>1x1 conv the fig. (c)</li>
+</ul>
+<p>Xception作为Inception v3的改进，主要是在Inception v3的基础上引入了depthwise separable convolution，在基本不增加网络复杂度的前提下提高了模型的效果。有些人会好奇为什么引入depthwise separable convolution没有大大降低网络的复杂度，因为depthwise separable convolution在mobileNet中主要就是为了降低网络的复杂度而设计的。原因是作者加宽了网络，使得参数数量和Inception v3差不多，然后在这前提下比较性能。因此Xception目的不在于模型压缩，而是提高性能。</p>
+<p><a href>作者：AI之路<br>来源：CSDN<br>原文：https://blog.csdn.net/u014380165/article/details/75142710<br>版权声明：本文为博主原创文章，转载请附上博文链接！</a></p>
+<h2 id="Aligned-Xception"><a href="#Aligned-Xception" class="headerlink" title="Aligned Xception"></a>Aligned Xception</h2><p><img src="C:\Users\liu-z\Desktop\Snipaste_2019-06-07_17-20-36.png" alt="Snipaste_2019-06-07_17-20-36"></p>
+<p>More recently, the MSRA team [31] modifies<br>the Xception model (called Aligned Xception) and further <strong>pushes the performance in the task of object detection</strong></p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
