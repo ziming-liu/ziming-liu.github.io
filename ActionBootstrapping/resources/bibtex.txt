@@ -1,0 +1,16 @@
+@inproceedings{10.1145/3343031.3350916,
+ author = {Liu, Ziming and Gao, Guangyu and Qin, A. K. and Wu, Tong and Liu, Chi Harold},
+ title = {Action Recognition with Bootstrapping Based Long-Range Temporal Context Attention},
+ year = {2019},
+ isbn = {9781450368896},
+ publisher = {Association for Computing Machinery},
+ address = {New York, NY, USA},
+ url = {https://doi.org/10.1145/3343031.3350916},
+ doi = {10.1145/3343031.3350916},
+ booktitle = {Proceedings of the 27th ACM International Conference on Multimedia},
+ pages = {583–591},
+ numpages = {9},
+ keywords = {context, self-attention, action recognition, bootstrapping attention},
+ location = {Nice, France},
+ series = {MM ’19}
+}
