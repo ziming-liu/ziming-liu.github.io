@@ -1,6 +1,4 @@
-Georgia Gkioxari is a research scientist at Facebook AI Research (FAIR). She
-received a PhD in computer science and electrical engineering from the 
-University of California at Berkeley under the supervision of Jitendra Malik 
-in 2016. Her research interests lie in computer vision, with a focus on object 
-and person recognition from static images and videos. In 2017, 
-Georgia received the Marr Prize at ICCV for "Mask R-CNN".
+Ziming Liu is a master student at Beijing Institute of Technology. He will 
+obtain his Master of Software Engineering degree from BIT under the supervision 
+of Guangyu Gao in 2020. His research interests lie in computer vision, with a focus
+ on action recognition from static images and videos.

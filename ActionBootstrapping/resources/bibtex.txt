@@ -1,4 +1,4 @@
-@inproceedings{10.1145/3343031.3350916,
+@inproceedings{actionbootstrapping,
  author = {Liu, Ziming and Gao, Guangyu and Qin, A. K. and Wu, Tong and Liu, Chi Harold},
  title = {Action Recognition with Bootstrapping Based Long-Range Temporal Context Attention},
  year = {2019},
