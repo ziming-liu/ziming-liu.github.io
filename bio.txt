@@ -1,4 +1,4 @@
-Ziming Liu is a master student at Beijing Institute of Technology. He will 
-obtain his Master of Software Engineering degree from BIT under the supervision 
+Ziming Liu is a PhD student in INRIA, France. He 
+obtained his Master of Software Engineering degree from BIT under the supervision 
 of Guangyu Gao in 2020. His research interests lie in computer vision, with a focus
  on action recognition from static images and videos.
