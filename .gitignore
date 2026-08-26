@@ -1,1 +1,5 @@
 *.DS_Store
+
+# Embargoed until the ECCV 2026 camera-ready is public - do not publish
+projects/vectorreloc/
+teasers/VectorReLoc-ECCV-2026.png
