@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VectorReLoc · Ziming Liu</title>
+<meta name="description" content="VectorReLoc: the first sparse SD map visual re-localization framework operating entirely on vectorized maps, with contrastive feature alignment and reliability prediction. ECCV 2026.">
+<meta name="author" content="Ziming Liu">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://ziming-liu.github.io/projects/vectorreloc/">
+<link rel="icon" href="../../teasers/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/main.js" defer></script>
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="VectorReLoc: Reliable Vectorized SD Map Visual Re-localization with Contrastive Feature Alignment">
+<meta property="og:description" content="The first sparse SD map visual re-localization framework operating entirely on vectorized maps. ECCV 2026.">
+<meta property="og:image" content="https://ziming-liu.github.io/teasers/VectorReLoc-ECCV-2026.png">
+</head>
+
+<body class="page--project">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="site-nav wrap" aria-label="Primary">
+    <a class="site-nav__brand" href="../../index.html">Ziming Liu</a>
+    <a href="../../index.html#news">News</a>
+    <a href="../../index.html#publications">Publications</a>
+    <a href="../../blog.html">Blog</a>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+  <section class="project-hero">
+    <h1>VectorReLoc: Reliable Vectorized SD Map Visual Re-localization with Contrastive Feature Alignment</h1>
+    <p class="project-hero__authors">
+      <a href="../../index.html">Ziming Liu</a><sup>1</sup> ·
+      Quanjie Xiang<sup>1,3</sup> ·
+      Yun Wang<sup>2</sup> ·
+      Yiting Wang<sup>2</sup> ·
+      Wen Chao<sup>2</sup> ·
+      Zhuanjian Xu<sup>2</sup> ·
+      Leichen Wang<sup>1</sup> ·
+      Hao Sun<sup>1</sup> ·
+      Guangyu Gao<sup>3</sup>
+    </p>
+    <p class="project-hero__meta">
+      <sup>1</sup>Bosch Research, Shanghai ·
+      <sup>2</sup>Bosch Cross-domain Computing Solutions (XC), Shanghai ·
+      <sup>3</sup>Beijing Institute of Technology
+    </p>
+    <p class="project-hero__meta">ECCV 2026 · to appear</p>
+    <ul class="linklist">
+      <li><a href="#bibtex">BibTeX</a></li>
+      <li><a href="../../index.html#vectorreloc">Publication entry</a></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <figure class="figure">
+      <img src="figures/framework.png" alt="Overall architecture of VectorReLoc" loading="lazy">
+      <figcaption>Overall structure of VectorReLoc. Blue: RTK SD map (used only for the feature alignment
+        loss during training). Orange: GNSS SD map — the two SD map encoders share parameters.
+        Green: visual map derived from the camera images. The online map construction network is frozen.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section" aria-labelledby="abstract-title">
+    <h2 id="abstract-title">Abstract</h2>
+    <div class="prose">
+      <p>Standard-definition (SD) maps are widely used in autonomous driving, but accurate ego-centric SD map
+        retrieval typically relies on costly RTK-GNSS joint localization. In contrast, low-cost GNSS introduces
+        meter-level 3-DoF pose offsets with high variance, yielding misaligned local maps that can degrade
+        downstream planning and control. Prior visual re-localization methods mostly rely on dense rasterized
+        BEV representations, which are computation-heavy and easily distracted by scene content irrelevant to
+        road geometry.</p>
+      <p>We propose <strong>VectorReLoc</strong>, the first sparse re-localization framework that directly
+        aligns vectorized SD maps with online-constructed vectorized visual maps to estimate the 3-DoF pose
+        offset. VectorReLoc further introduces a feature alignment objective that structures the embedding
+        space for accurate offset regression, together with a reliability predictor to identify potentially
+        unreliable corrections and mitigate silent failures. To enable realistic training and evaluation, we
+        additionally present a large-scale dataset with paired RTK-retrieved and GNSS-retrieved SD maps,
+        providing real pose-offset labels rather than the simulated noise used in prior work. Experiments on
+        public benchmarks and the proposed dataset demonstrate improved accuracy, robustness and efficiency
+        over previous approaches.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="contrib-title">
+    <h2 id="contrib-title">Contributions</h2>
+    <ul class="highlights">
+      <li><strong>Sparse vectorized re-localization.</strong> The first SD map visual re-localization method
+        that bypasses dense BEV grids and operates directly on vectorized map representations, achieving the
+        best accuracy at significantly reduced computational cost.</li>
+      <li><strong>Contrastive map feature alignment.</strong> A bidirectional InfoNCE objective with a
+        per-sample margin loss that explicitly structures the embedding space for reliable offset regression.</li>
+      <li><strong>Reliability prediction.</strong> A per-dimension confidence scoring module; filtered reliable
+        samples show higher recall and lower error, letting downstream modules selectively accept corrections.</li>
+      <li><strong>New dataset and benchmark.</strong> A large-scale dataset with paired <em>real</em> RTK-GNSS
+        and low-cost GNSS SD maps, plus the <em>GNSS Offset Distribution Hypothesis</em>: real GNSS offsets are
+        heavy-tailed and well captured by Student-<em>t</em> distributions rather than Gaussian noise.</li>
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="dataset-title">
+    <h2 id="dataset-title">VectorReLoc Dataset</h2>
+    <div class="prose">
+      <p>Roughly 6,534 scenes and 170,533 frames recorded at 1&nbsp;Hz across Shanghai, Jiangsu and Anhui,
+        covering urban, suburban, highway, night and rain conditions. Each frame provides 8 surround-view
+        images at 1024&times;768, low-cost GNSS/IMU measurements, dual RTK poses and the corresponding SD maps
+        from a commercial map provider. Unlike prior benchmarks that perturb a reference trajectory with
+        artificial noise, every offset label here comes from real paired RTK and low-cost GNSS retrievals.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <caption class="visually-hidden">Comparison of datasets used in SD map visual re-localization</caption>
+        <thead>
+          <tr><th scope="col">Dataset</th><th scope="col">Scenes</th><th scope="col">Frames</th><th scope="col">Freq.</th><th scope="col">RTK-GNSS loc.</th><th scope="col">GNSS loc.</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>nuScenes</td><td>~1,000</td><td>40,157</td><td>2 Hz</td><td>&#10007;</td><td>&#10003;</td></tr>
+          <tr><td>Argoverse2</td><td>~850</td><td>27,000</td><td>2 Hz</td><td>&#10007;</td><td>&#10003;</td></tr>
+          <tr class="row-ours"><td>VectorReLoc (ours)</td><td>6,534</td><td>170,533</td><td>1 Hz</td><td>&#10003;</td><td>&#10003;</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="figure-grid mt-lg">
+      <figure class="figure">
+        <img src="figures/offset_position_hist.jpg" alt="Histogram of GNSS position offsets" loading="lazy">
+        <figcaption>Position offset histogram</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="figures/offset_yaw_hist.jpg" alt="Histogram of GNSS yaw offsets" loading="lazy">
+        <figcaption>Yaw offset histogram</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="alignment-title">
+    <h2 id="alignment-title">Contrastive Feature Alignment</h2>
+    <div class="prose">
+      <p>The visual map is built under the true vehicle pose while the SD map is queried under an inaccurate
+        GNSS pose. A well-behaved embedding space therefore requires the visual-map feature to align with the
+        RTK SD-map feature, while the GNSS SD-map feature is pushed away from both. Plain regression does not
+        enforce this geometry in the common small-offset regime, so we optimise a bidirectional InfoNCE loss
+        with a per-sample margin term jointly with the regression loss.</p>
+    </div>
+    <div class="figure-grid mt-lg">
+      <figure class="figure">
+        <img src="figures/tsne_baseline.jpg" alt="t-SNE of map features for the baseline model" loading="lazy">
+        <figcaption>Baseline</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="figures/tsne_joint.jpg" alt="t-SNE of map features with joint contrastive training" loading="lazy">
+        <figcaption>Joint training with feature alignment</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="qualitative-title">
+    <h2 id="qualitative-title">Qualitative Results</h2>
+    <ul class="legend">
+      <li><span style="color:#d13438">Ground-truth local visual map</span></li>
+      <li><span style="color:#1f2328">Ground-truth RTK SD map</span></li>
+      <li><span style="color:#f09228">GNSS-retrieved SD map (before correction)</span></li>
+      <li><span style="color:#1772d0">VectorReLoc-corrected SD map</span></li>
+    </ul>
+    <figure class="figure">
+      <img src="figures/qualitative_demo1.jpg" alt="Qualitative SD map re-localization results, first sequence" loading="lazy">
+    </figure>
+    <figure class="figure mt-md">
+      <img src="figures/qualitative_demo2.jpg" alt="Qualitative SD map re-localization results, second sequence" loading="lazy">
+    </figure>
+  </section>
+
+  <section class="section" id="bibtex" aria-labelledby="bibtex-title">
+    <h2 id="bibtex-title">BibTeX</h2>
+    <div class="prose">
+      <details class="bibtex" open>
+        <summary>BibTeX</summary>
+<pre><code>@inproceedings{vectorreloc-eccv-2026,
+  title     = {VectorReLoc: Reliable Vectorized SD Map Visual Re-localization with Contrastive Feature Alignment},
+  author    = {Liu, Ziming and Xiang, Quanjie and Wang, Yun and Wang, Yiting and Chao, Wen and Xu, Zhuanjian and Wang, Leichen and Sun, Hao and Gao, Guangyu},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  year      = {2026}
+}</code></pre>
+      </details>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="ack-title">
+    <h2 id="ack-title">Acknowledgements</h2>
+    <div class="prose">
+      <p>Supported by the National Natural Science Foundation of China (Grant No. 62472033) and the Beijing
+        Natural Science Foundation (Grant No. L2607023), and by the Bosch High Performance Computing Cluster.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer wrap">
+  <p>&copy; <span id="year">2026</span> Ziming Liu</p>
+  <p><a href="../../index.html#publications">All publications</a></p>
+</footer>
+
+</body>
+</html>

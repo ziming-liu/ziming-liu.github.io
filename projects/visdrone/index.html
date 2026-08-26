@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VisDrone 2019 Challenge · Ziming Liu</title>
+<meta name="description" content="ICCV 2019 VisDrone Challenge: 2nd place in the video object detection (VID) task, with the official challenge reports.">
+<meta name="author" content="Ziming Liu">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://ziming-liu.github.io/projects/visdrone/">
+<link rel="icon" href="../../teasers/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/main.js" defer></script>
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="ICCV 2019 VisDrone Challenge — 2nd place, VID task">
+<meta property="og:description" content="Drone-captured object detection in images and videos, ICCV 2019 VisDrone Workshop.">
+<meta property="og:image" content="https://ziming-liu.github.io/teasers/visdrone2019.jpg">
+</head>
+
+<body class="page--project">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="site-nav wrap" aria-label="Primary">
+    <a class="site-nav__brand" href="../../index.html">Ziming Liu</a>
+    <a href="../../index.html#news">News</a>
+    <a href="../../index.html#publications">Publications</a>
+    <a href="../../blog.html">Blog</a>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+  <section class="project-hero">
+    <h1>ICCV 2019 VisDrone Challenge</h1>
+    <p class="project-hero__meta"><strong>2nd place</strong> in the video object detection (VID) task</p>
+    <p class="project-hero__authors">
+      Team led by <a href="../../index.html">Ziming Liu</a> (first author), with
+      Jing Ge, Tong Wu and <a href="https://guangyugao.weebly.com/" rel="noopener">Guangyu Gao</a> (supervisor)
+    </p>
+    <p class="project-hero__meta">Beijing Institute of Technology · ICCV 2019 VisDrone Workshop</p>
+    <ul class="linklist">
+      <li><a href="http://www.aiskyeye.com/views/index" rel="noopener">Challenge website</a></li>
+      <li><a href="#reports">Challenge reports</a></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <figure class="figure">
+      <img src="figures/challenge.jpg" alt="Drone-captured scenes from the VisDrone 2019 benchmark" loading="lazy">
+      <figcaption>VisDrone collects drone-captured imagery across cities and scenarios, dominated by densely
+        packed small objects seen from steep viewing angles.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section" aria-labelledby="about-title">
+    <h2 id="about-title">About the Challenge</h2>
+    <div class="prose">
+      <p>The VisDrone challenge asks participants to detect and track objects such as pedestrians, cars, buses
+        and bicycles in imagery captured by drone platforms. Compared with ground-level benchmarks, objects
+        occupy very few pixels, appear in dense clusters, and undergo large scale variation as the drone
+        changes altitude — making it a demanding testbed for small object detection.</p>
+      <p>Our entry built on the small-object detection work developed in the same period,
+        <a href="../ipgnet/index.html">IPG-Net</a> and <a href="../hrdnet/index.html">HRDNet</a>, which target
+        exactly the information imbalance and resolution trade-offs that dominate this benchmark.</p>
+      <p>The reports below are the joint challenge summaries published by the organisers together with all
+        participating teams.</p>
+    </div>
+  </section>
+
+  <section class="section" id="reports" aria-labelledby="reports-title">
+    <h2 id="reports-title">Challenge Reports</h2>
+
+    <div class="paper-card">
+      <a href="visdronevid_paper.pdf">
+        <img class="layered-paper" src="figures/vid_preview.jpg" alt="First page of the VisDrone-VID2019 report" width="200" loading="lazy">
+      </a>
+      <div>
+        <p>Pengfei Zhu, Dawei Du, &hellip;, Ziming Liu.<br>
+          <em>VisDrone-VID2019: The Vision Meets Drone Object Detection in Video Challenge Results.</em><br>
+          ICCV 2019 Workshops.</p>
+        <details class="bibtex">
+          <summary>BibTeX</summary>
+<pre><code>@inproceedings{dronevid,
+  title        = {VisDrone-VID2019: The Vision Meets Drone Object Detection in Video Challenge Results},
+  author       = {Zhu, Pengfei and Du, Dawei and Wen, Longyin and Bian, Xiao and Ling, Haibin and Hu, Qinghua and others},
+  booktitle    = {IEEE/CVF International Conference on Computer Vision (ICCV) Workshops},
+  month        = oct,
+  year         = {2019},
+  organization = {IEEE}
+}</code></pre>
+        </details>
+      </div>
+    </div>
+
+    <div class="paper-card mt-lg">
+      <a href="visdronedet_paper.pdf">
+        <img class="layered-paper" src="figures/det_preview.jpg" alt="First page of the VisDrone-DET2019 report" width="200" loading="lazy">
+      </a>
+      <div>
+        <p>Dawei Du, Pengfei Zhu, &hellip;, Ziming Liu.<br>
+          <em>VisDrone-DET2019: The Vision Meets Drone Object Detection in Image Challenge Results.</em><br>
+          ICCV 2019 Workshops.</p>
+        <details class="bibtex">
+          <summary>BibTeX</summary>
+<pre><code>@inproceedings{dronedet,
+  title        = {VisDrone-DET2019: The Vision Meets Drone Object Detection in Image Challenge Results},
+  author       = {Du, Dawei and Zhu, Pengfei and Wen, Longyin and Bian, Xiao and Ling, Haibin and Hu, Qinghua and others},
+  booktitle    = {IEEE/CVF International Conference on Computer Vision (ICCV) Workshops},
+  month        = oct,
+  year         = {2019},
+  organization = {IEEE}
+}</code></pre>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer wrap">
+  <p>&copy; <span id="year">2026</span> Ziming Liu</p>
+  <p><a href="../../index.html#publications">All publications</a></p>
+</footer>
+
+</body>
+</html>

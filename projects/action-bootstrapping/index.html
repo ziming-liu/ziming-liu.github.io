@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Action Recognition with Bootstrapping based Long-range Temporal Context Attention</title>
+<meta name="description" content="ACM MM 2019 project page: action recognition with bootstrapping based long-range temporal context attention.">
+<meta name="author" content="Ziming Liu">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://ziming-liu.github.io/projects/action-bootstrapping/">
+<link rel="icon" href="../../teasers/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/main.js" defer></script>
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Action Recognition with Bootstrapping based Long-range Temporal Context Attention">
+<meta property="og:description" content="ACM MM 2019 project page.">
+<meta property="og:image" content="https://ziming-liu.github.io/teasers/actionbootstrapping.png">
+</head>
+
+<body class="page--project">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="site-nav wrap" aria-label="Primary">
+    <a class="site-nav__brand" href="../../index.html">Ziming Liu</a>
+    <a href="../../index.html#news">News</a>
+    <a href="../../index.html#publications">Publications</a>
+    <a href="../../blog.html">Blog</a>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+  <section class="project-hero">
+    <h1>Action Recognition with Bootstrapping based Long-range Temporal Context Attention</h1>
+    <p class="project-hero__authors">
+      <a href="../../index.html">Ziming Liu</a> ·
+      <a href="https://guangyugao.weebly.com/" rel="noopener">Guangyu Gao</a> ·
+      A. K. Qin
+    </p>
+    <p class="project-hero__meta">Beijing Institute of Technology</p>
+    <p class="project-hero__meta">ACM Multimedia 2019, Nice, France</p>
+    <ul class="linklist">
+      <li><a href="videoactionattention_paper.pdf">Paper (PDF)</a></li>
+      <li><a href="https://dl.acm.org/doi/10.1145/3343031.3350916" rel="noopener">ACM Digital Library</a></li>
+      <li><a href="#bibtex">BibTeX</a></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <figure class="figure">
+      <img src="../../teasers/actionbootstrapping.png" alt="Overview of the bootstrapping attention framework" loading="lazy">
+    </figure>
+  </section>
+
+  <section class="section" aria-labelledby="abstract-title">
+    <h2 id="abstract-title">Abstract</h2>
+    <div class="prose">
+      <p>Actions always refer to complex vision variations in a long-range redundant video sequence.
+        Instead of focusing on a limited range sequence, i.e. convolution on adjacent frames, in this
+        paper we propose an action recognition approach with bootstrapping based long-range temporal
+        context attention. Specifically, due to vision variations of the local region across frames,
+        we target capturing temporal context by proposing the Temporal Pixels based Parallel-head
+        Attention (TPPA) block. In TPPA, we apply the self-attention mechanism between local regions
+        at the same position across temporal frames to capture the interaction impacts. Meanwhile, to
+        deal with video redundancy and capture long-range context, TPPA is extended to the Random
+        Frames based Bootstrapping Attention (RFBA) framework. While the bootstrapping sampling frames
+        have the same distribution as the whole video sequence, RFBA not only captures longer temporal
+        context with only a few sampling frames but also has a comprehensive representation through
+        multiple sampling. Furthermore, we also apply this temporal context attention to image-based
+        action recognition by transforming the image into a &ldquo;pseudo video&rdquo; with a spatial
+        shift. Finally, we conduct extensive experiments and empirical evaluations on two popular
+        datasets: UCF101 for videos and Stanford40 for images. In particular, our approach achieves
+        top-1 accuracy of 91.7% on UCF101 and mAP of 90.9% on Stanford40.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="approach-title">
+    <h2 id="approach-title">Approach</h2>
+    <figure class="figure">
+      <img src="resources/overall.png" alt="Overall architecture of the proposed framework" loading="lazy">
+      <figcaption>Overall architecture: TPPA blocks aggregated by the RFBA framework.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section" id="bibtex" aria-labelledby="paper-title">
+    <h2 id="paper-title">Paper</h2>
+    <div class="paper-card">
+      <a href="videoactionattention_paper.pdf">
+        <img class="layered-paper" src="resources/paper_preview.png" alt="First page of the paper" width="200" loading="lazy">
+      </a>
+      <div>
+        <p>Ziming Liu, Guangyu Gao, A. K. Qin, Tong Wu, Chi Harold Liu.<br>
+          <em>Action Recognition with Bootstrapping based Long-range Temporal Context Attention.</em><br>
+          ACM Multimedia, 2019.</p>
+        <details class="bibtex">
+          <summary>BibTeX</summary>
+<pre><code>@inproceedings{actionbootstrapping,
+  title     = {Action Recognition with Bootstrapping Based Long-Range Temporal Context Attention},
+  author    = {Liu, Ziming and Gao, Guangyu and Qin, A. K. and Wu, Tong and Liu, Chi Harold},
+  booktitle = {Proceedings of the 27th ACM International Conference on Multimedia},
+  series    = {MM '19},
+  pages     = {583--591},
+  numpages  = {9},
+  address   = {New York, NY, USA},
+  publisher = {Association for Computing Machinery},
+  isbn      = {9781450368896},
+  year      = {2019},
+  doi       = {10.1145/3343031.3350916}
+}</code></pre>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="ack-title">
+    <h2 id="ack-title">Acknowledgements</h2>
+    <div class="prose">
+      <p>This work was supported by the National Natural Science Foundation of China under Grant
+        No. U1736117, and in part by the Australian Research Council under Grants No. LP170100416
+        and LP180100114.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer wrap">
+  <p>&copy; <span id="year">2026</span> Ziming Liu</p>
+  <p>Contact: <a href="mailto:liuziming.email@gmail.com">liuziming.email@gmail.com</a></p>
+</footer>
+
+</body>
+</html>

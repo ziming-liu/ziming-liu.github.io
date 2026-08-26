@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impromptu VLA · Ziming Liu</title>
+<meta name="description" content="Impromptu VLA: open weights and open data for driving vision-language-action models. Over 80K curated corner-case clips distilled from 8 open-source driving datasets. NeurIPS 2025.">
+<meta name="author" content="Ziming Liu">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://ziming-liu.github.io/projects/impromptu-vla/">
+<link rel="icon" href="../../teasers/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/main.js" defer></script>
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Impromptu VLA: Open Weights and Open Data for Driving Vision-Language-Action Models">
+<meta property="og:description" content="Over 80K curated unstructured-scenario clips for driving VLAs. NeurIPS 2025.">
+<meta property="og:image" content="https://ziming-liu.github.io/teasers/ImpromptuVLA-NeurIPS-2025.jpg">
+</head>
+
+<body class="page--project">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="site-nav wrap" aria-label="Primary">
+    <a class="site-nav__brand" href="../../index.html">Ziming Liu</a>
+    <a href="../../index.html#news">News</a>
+    <a href="../../index.html#publications">Publications</a>
+    <a href="../../blog.html">Blog</a>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+  <section class="project-hero">
+    <h1>Impromptu VLA: Open Weights and Open Data for Driving Vision-Language-Action Models</h1>
+    <p class="project-hero__authors">
+      Haohan Chi<sup>*,1</sup> ·
+      Huan-ang Gao<sup>*,1</sup> ·
+      <a href="../../index.html">Ziming Liu</a><sup>&dagger;,2</sup> ·
+      Jianing Liu<sup>1</sup> ·
+      Chenyu Liu<sup>1</sup> ·
+      Jinwei Li<sup>1</sup> ·
+      Kaisen Yang<sup>1</sup> ·
+      Yangcheng Yu<sup>1</sup> ·
+      Zeda Wang<sup>1</sup> ·
+      Wenyi Li<sup>1</sup> ·
+      Leichen Wang<sup>2</sup> ·
+      Xingtao Hu<sup>2</sup> ·
+      Hao Sun<sup>2</sup> ·
+      Hang Zhao<sup>3</sup> ·
+      Hao Zhao<sup>&dagger;,1</sup>
+    </p>
+    <p class="project-hero__meta">
+      <sup>1</sup>AIR, Tsinghua University ·
+      <sup>2</sup>Bosch Research ·
+      <sup>3</sup>IIIS, Tsinghua University
+    </p>
+    <p class="project-hero__meta"><sup>*</sup>Equal contribution · <sup>&dagger;</sup>Corresponding author</p>
+    <p class="project-hero__meta">NeurIPS 2025</p>
+    <ul class="linklist">
+      <li><a href="https://arxiv.org/abs/2505.23757" rel="noopener">arXiv</a></li>
+      <li><a href="https://impromptu-vla.c7w.tech/" rel="noopener">Official project page</a></li>
+      <li><a href="https://github.com/ahydchh/Impromptu-VLA" rel="noopener">Code</a></li>
+      <li><a href="https://huggingface.co/datasets/aaaaaap/unstructed" rel="noopener">Dataset</a></li>
+      <li><a href="#bibtex">BibTeX</a></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <figure class="figure">
+      <img src="figures/teaser.jpg" alt="Visual abstract of the Impromptu VLA dataset and its benchmark results" loading="lazy">
+      <figcaption>Visual abstract. The Impromptu VLA Dataset contains over 80K clips curated from 8
+        open-source driving datasets, organised around four challenging unstructured categories.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section" aria-labelledby="abstract-title">
+    <h2 id="abstract-title">Abstract</h2>
+    <div class="prose">
+      <p>Vision-Language-Action (VLA) models for autonomous driving show promise but falter in unstructured
+        corner case scenarios, largely due to a scarcity of targeted benchmarks. To address this, we introduce
+        Impromptu VLA. Our core contribution is the <strong>Impromptu VLA Dataset</strong>: over 80,000
+        meticulously curated video clips, distilled from over 2M source clips sourced from 8 open-source
+        large-scale datasets. This dataset is built upon our novel taxonomy of four challenging unstructured
+        categories and features rich, planning-oriented question-answering annotations and action trajectories.</p>
+      <p>Crucially, experiments demonstrate that VLAs trained with our dataset achieve substantial performance
+        gains on established benchmarks — improving closed-loop NeuroNCAP scores and collision rates, and
+        reaching near state-of-the-art L2 accuracy in open-loop nuScenes trajectory prediction. Furthermore,
+        our Q&amp;A suite serves as an effective diagnostic, revealing clear VLM improvements in perception,
+        prediction, and planning.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="pipeline-title">
+    <h2 id="pipeline-title">Data Processing and Annotation Pipeline</h2>
+    <figure class="figure">
+      <img src="figures/pipeline.jpg" alt="Six-stage data processing and annotation pipeline for the Impromptu VLA dataset" loading="lazy">
+      <figcaption>From dataset collection and taxonomy-driven scenario mining, through frequency alignment and
+        clip selection, to multi-task annotation generation with Qwen2.5-VL and human verification.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section" aria-labelledby="results-title">
+    <h2 id="results-title">Open-loop Results on nuScenes</h2>
+    <div class="prose">
+      <p>L2 trajectory prediction error (metres, lower is better). Training on a subset of Impromptu VLA before
+        fine-tuning on nuScenes improves every horizon.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <caption class="visually-hidden">Open-loop trajectory prediction L2 errors on nuScenes</caption>
+        <thead>
+          <tr><th scope="col">Model</th><th scope="col">1 s</th><th scope="col">2 s</th><th scope="col">3 s</th><th scope="col">Avg.</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>3B Base + nuScenes</td><td>0.14</td><td>0.30</td><td>0.58</td><td>0.34</td></tr>
+          <tr class="row-ours"><td>3B Base + Impromptu + nuScenes</td><td>0.13</td><td>0.27</td><td>0.52</td><td>0.30</td></tr>
+          <tr><td>7B Base + nuScenes</td><td>0.13</td><td>0.28</td><td>0.55</td><td>0.32</td></tr>
+          <tr class="row-ours"><td>7B Base + Impromptu + nuScenes</td><td>0.13</td><td>0.27</td><td>0.53</td><td>0.30</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="bibtex" aria-labelledby="bibtex-title">
+    <h2 id="bibtex-title">BibTeX</h2>
+    <div class="prose">
+      <details class="bibtex" open>
+        <summary>BibTeX</summary>
+<pre><code>@inproceedings{chi2025impromptu,
+  title     = {Impromptu VLA: Open Weights and Open Data for Driving Vision-Language-Action Models},
+  author    = {Chi, Haohan and Gao, Huan-ang and Liu, Ziming and Liu, Jianing and Liu, Chenyu and Li, Jinwei and Yang, Kaisen and Yu, Yangcheng and Wang, Zeda and Li, Wenyi and Wang, Leichen and Hu, Xingtao and Sun, Hao and Zhao, Hang and Zhao, Hao},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2025}
+}</code></pre>
+      </details>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="ack-title">
+    <h2 id="ack-title">Acknowledgements</h2>
+    <div class="prose">
+      <p>Outcome of an industry&ndash;academia collaboration between Bosch Research and Tsinghua University,
+        sponsored by Bosch Research. Figures on this page are reproduced from the paper, which is released
+        under CC BY-NC-ND.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer wrap">
+  <p>&copy; <span id="year">2026</span> Ziming Liu</p>
+  <p><a href="../../index.html#publications">All publications</a></p>
+</footer>
+
+</body>
+</html>

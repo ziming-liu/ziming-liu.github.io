@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TMNet · Ziming Liu</title>
+<meta name="description" content="TMNet: a light-weight Temporal Memory Network that predicts spatio-temporal information from a single frame for real-time video action recognition. IEEE Access 2020.">
+<meta name="author" content="Ziming Liu">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://ziming-liu.github.io/projects/tmnet/">
+<link rel="icon" href="../../teasers/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/main.js" defer></script>
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Temporal Memory Network Towards Real-Time Video Understanding">
+<meta property="og:description" content="A light-weight network that infers spatio-temporal information from a single frame. IEEE Access 2020.">
+<meta property="og:image" content="https://ziming-liu.github.io/projects/tmnet/figures/teaser.png">
+</head>
+
+<body class="page--project">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="site-nav wrap" aria-label="Primary">
+    <a class="site-nav__brand" href="../../index.html">Ziming Liu</a>
+    <a href="../../index.html#news">News</a>
+    <a href="../../index.html#publications">Publications</a>
+    <a href="../../blog.html">Blog</a>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+  <section class="project-hero">
+    <h1>Temporal Memory Network Towards Real-Time Video Understanding</h1>
+    <p class="project-hero__authors">
+      <a href="../../index.html">Ziming Liu</a><sup>*,1</sup> ·
+      Jinyang Li<sup>*,1</sup> ·
+      <a href="https://guangyugao.weebly.com/" rel="noopener">Guangyu Gao</a><sup>1,&#9993;</sup> ·
+      Alex K. Qin<sup>2</sup>
+    </p>
+    <p class="project-hero__meta">
+      <sup>1</sup>Beijing Institute of Technology ·
+      <sup>2</sup>Data Science Research Institute, Swinburne University of Technology
+    </p>
+    <p class="project-hero__meta"><sup>*</sup>Co-first authors · <sup>&#9993;</sup>Corresponding author</p>
+    <p class="project-hero__meta">IEEE Access, vol. 8, 2020</p>
+    <ul class="linklist">
+      <li><a href="tmnet_paper.pdf">Paper (PDF)</a></li>
+      <li><a href="https://doi.org/10.1109/ACCESS.2020.3043386" rel="noopener">DOI</a></li>
+      <li><a href="#bibtex">BibTeX</a></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <figure class="figure">
+      <img src="figures/teaser.png" alt="TMNet architecture with a shared backbone, a classification branch and a self-supervised regression branch" loading="lazy">
+      <figcaption>During training the classification branch learns spatio-temporal features from a video
+        sequence, while the self-supervised regression branch is forced to reproduce the same feature from a
+        single frame. At inference only the single-frame branch is needed.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section" aria-labelledby="abstract-title">
+    <h2 id="abstract-title">Abstract</h2>
+    <div class="prose">
+      <p>Action recognition is the basic task for video understanding. Although action recognition has achieved
+        impressive performance in static image-based tasks (e.g. Stanford40) with deep learning, real-time
+        video-based action recognition is still challenging due to video's high complexity and computation
+        cost. Motivated by a human's recognition ability with only a short glance, we propose the fast
+        light-weighted <strong>Temporal Memory Network (TMNet)</strong> to achieve real-time video action
+        recognition.</p>
+      <p>TMNet has a self-supervised structure for exploring both spatial and temporal information with a
+        single video frame, and consists of three main parts: the base backbone, the regression branch and the
+        classification branch. The base backbone is a shallow 2D CNN producing the video's initial feature
+        sequences, and the classification branch builds on existing video recognition models such as TSN and
+        I3D. To learn spatio-temporal information at lower cost we add a self-supervised regression branch
+        based on a light-weight 2D CNN that takes a single frame as input.</p>
+      <p>During training the classification branch and the backbone learn the sequence's spatio-temporal
+        feature, while the regression branch learns the same feature under the supervision of the
+        classification branch's output — forcing it to recover the temporal information of adjacent frames
+        from one frame. At inference TMNet therefore needs only one frame per video, achieving real-time
+        action recognition with a good accuracy/speed trade-off.</p>
+    </div>
+  </section>
+
+  <section class="section" id="bibtex" aria-labelledby="paper-title">
+    <h2 id="paper-title">Paper</h2>
+    <div class="paper-card">
+      <a href="tmnet_paper.pdf">
+        <img class="layered-paper" src="figures/paper_preview.jpg" alt="First page of the TMNet paper" width="200" loading="lazy">
+      </a>
+      <div>
+        <p>Ziming Liu, Jinyang Li, Guangyu Gao, Alex K. Qin.<br>
+          <em>Temporal Memory Network Towards Real-Time Video Understanding.</em><br>
+          IEEE Access, vol. 8, pp. 223837&ndash;223847, 2020.</p>
+        <details class="bibtex" open>
+          <summary>BibTeX</summary>
+<pre><code>@article{liu2020temporal,
+  title     = {Temporal Memory Network Towards Real-Time Video Understanding},
+  author    = {Liu, Ziming and Li, Jinyang and Gao, Guangyu and Qin, Alex K.},
+  journal   = {IEEE Access},
+  volume    = {8},
+  pages     = {223837--223847},
+  year      = {2020},
+  publisher = {IEEE},
+  doi       = {10.1109/ACCESS.2020.3043386}
+}</code></pre>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="ack-title">
+    <h2 id="ack-title">Acknowledgements</h2>
+    <div class="prose">
+      <p>Supported mainly by the National Natural Science Foundation of China under Grant 61972036, in part by
+        Grants U1736117 and 91746210, and in part by the Australian Research Council under Grants LP180100114
+        and DP200102611.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer wrap">
+  <p>&copy; <span id="year">2026</span> Ziming Liu</p>
+  <p><a href="../../index.html#publications">All publications</a></p>
+</footer>
+
+</body>
+</html>

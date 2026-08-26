@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IPG-Net · Ziming Liu</title>
+<meta name="description" content="IPG-Net: Image Pyramid Guidance Network for small object detection, injecting image pyramid guidance into the backbone stream to fix information imbalance. CVPR Workshops 2020.">
+<meta name="author" content="Ziming Liu">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://ziming-liu.github.io/projects/ipgnet/">
+<link rel="icon" href="../../teasers/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/main.js" defer></script>
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="IPG-Net: Image Pyramid Guidance Network for Small Object Detection">
+<meta property="og:description" content="Image pyramid guidance injected into the backbone stream to fix information imbalance. CVPR Workshops 2020.">
+<meta property="og:image" content="https://ziming-liu.github.io/teasers/IPGNET.png">
+</head>
+
+<body class="page--project">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="site-nav wrap" aria-label="Primary">
+    <a class="site-nav__brand" href="../../index.html">Ziming Liu</a>
+    <a href="../../index.html#news">News</a>
+    <a href="../../index.html#publications">Publications</a>
+    <a href="../../blog.html">Blog</a>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+  <section class="project-hero">
+    <h1>IPG-Net: Image Pyramid Guidance Network for Small Object Detection</h1>
+    <p class="project-hero__authors">
+      <a href="../../index.html">Ziming Liu</a><sup>1</sup> ·
+      <a href="https://guangyugao.weebly.com/" rel="noopener">Guangyu Gao</a><sup>1,&#9993;</sup> ·
+      Lin Sun<sup>2</sup> ·
+      Li Fang<sup>1</sup>
+    </p>
+    <p class="project-hero__meta">
+      <sup>1</sup>Beijing Institute of Technology ·
+      <sup>2</sup>Samsung Strategy and Innovation Center
+    </p>
+    <p class="project-hero__meta">CVPR Workshops 2020</p>
+    <ul class="linklist">
+      <li><a href="IPGNet_CVPRW_2020_paper.pdf">Paper (PDF)</a></li>
+      <li><a href="https://www.youtube.com/watch?v=4X6_6A1kA_w" rel="noopener">Presentation video</a></li>
+      <li><a href="#bibtex">BibTeX</a></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <figure class="figure">
+      <img src="figures/teaser.png" alt="IPG-Net architecture with image pyramid guidance transformation and fusion modules" loading="lazy">
+      <figcaption>An image pyramid is transformed and fused into every stage of the backbone stream, so that
+        even the deepest stage retains enough spatial information for bounding box regression.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section" aria-labelledby="abstract-title">
+    <h2 id="abstract-title">Abstract</h2>
+    <div class="prose">
+      <p>For Convolutional Neural Network-based object detection, there is a typical dilemma: the spatial
+        information is well kept in the shallow layers which unfortunately do not have enough semantic
+        information, while the deep layers have a high semantic concept but lost a lot of spatial information,
+        resulting in serious information imbalance. To acquire enough semantic information for shallow layers,
+        Feature Pyramid Networks (FPN) is used to build a top-down propagated path.</p>
+      <p>In this paper, except for top-down combining of information for shallow layers, we propose a novel
+        network called <strong>Image Pyramid Guidance Network (IPG-Net)</strong> to make sure both the spatial
+        information and semantic information are abundant for each layer. IPG-Net has two main parts: the
+        image pyramid guidance transformation module and the image pyramid guidance fusion module. Our main
+        idea is to introduce the image pyramid guidance into the backbone stream to solve the information
+        imbalance problem, which alleviates the vanishment of small object features. The transformation module
+        promises that even in the deepest stage of the backbone there is enough spatial information for
+        bounding box regression and classification.</p>
+      <p>We applied this network to both one-stage and two-stage detection models, obtaining state-of-the-art
+        results on the most popular benchmarks, MS COCO and Pascal VOC.</p>
+    </div>
+  </section>
+
+  <section class="section" id="bibtex" aria-labelledby="paper-title">
+    <h2 id="paper-title">Paper</h2>
+    <div class="paper-card">
+      <a href="IPGNet_CVPRW_2020_paper.pdf">
+        <img class="layered-paper" src="figures/paper_preview.jpg" alt="First page of the IPG-Net paper" width="200" loading="lazy">
+      </a>
+      <div>
+        <p>Ziming Liu, Guangyu Gao, Lin Sun, Li Fang.<br>
+          <em>IPG-Net: Image Pyramid Guidance Network for Small Object Detection.</em><br>
+          IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2020.</p>
+        <details class="bibtex" open>
+          <summary>BibTeX</summary>
+<pre><code>@inproceedings{liu2020ipg,
+  title        = {IPG-Net: Image pyramid guidance network for small object detection},
+  author       = {Liu, Ziming and Gao, Guangyu and Sun, Lin and Fang, Li},
+  booktitle    = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  pages        = {1026--1027},
+  year         = {2020},
+  organization = {IEEE}
+}</code></pre>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer wrap">
+  <p>&copy; <span id="year">2026</span> Ziming Liu</p>
+  <p><a href="../../index.html#publications">All publications</a></p>
+</footer>
+
+</body>
+</html>
