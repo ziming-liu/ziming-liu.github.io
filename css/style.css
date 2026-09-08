@@ -1,6 +1,6 @@
 /* ==========================================================================
    Ziming Liu — academic homepage
-   Single stylesheet shared by index.html, blog.html and project pages.
+         Single stylesheet shared by index.html and project pages.
    ========================================================================== */
 
 :root {
@@ -470,50 +470,6 @@ a:focus-visible {
 .copy-btn:hover {
   color: var(--accent);
   border-color: var(--accent);
-}
-
-/* Blog -------------------------------------------------------------------- */
-
-.post-list {
-  display: grid;
-  gap: 1rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  max-width: var(--measure);
-}
-
-.post-list a {
-  display: block;
-  padding: 1rem 1.25rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--bg-alt);
-  color: var(--text);
-}
-
-.post-list a:hover {
-  border-color: var(--accent);
-  text-decoration: none;
-}
-
-.post-list time {
-  display: block;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.empty-state {
-  max-width: var(--measure);
-  padding: 2rem;
-  border: 1px dashed var(--border);
-  border-radius: var(--radius);
-  color: var(--text-muted);
-  text-align: center;
-}
-
-.empty-state p:last-child {
-  margin-bottom: 0;
 }
 
 /* Project page ------------------------------------------------------------ */
