@@ -69,16 +69,20 @@
         <a href="mailto:ziming.liu@cn.bosch.com">ziming.liu@cn.bosch.com</a>
       </p>
       <p class="profile__bio">
-        I am a research scientist at <a href="https://www.bosch.com/research/" rel="noopener">Bosch Research</a>
+        I work as a research scientist at <a href="https://www.bosch.com/research/" rel="noopener">Bosch Research</a>
         in Shanghai, working on AI algorithms for autonomous driving and robotic applications. I obtained my PhD in the
         ACENTAURI team at <a href="https://www.inria.fr/en" rel="noopener">Inria, France</a>, advised by
         <a href="https://team.inria.fr/acentauri/philippe-martinet/" rel="noopener">Dr. Philippe Martinet</a> and <a
           href="https://team.inria.fr/acentauri/ezio-malis/" rel="noopener">Dr. Ezio Malis</a>. Before that I received a
         master's degree in software
-        engineering from <a href="https://bit.edu.cn" rel="noopener">BIT</a>, supervised by
-        <a href="https://guangyugao.weebly.com/" rel="noopener">Prof. Guangyu Gao</a>, Prof. Alex K. Qin and
-        Dr. Lin Sun. My work spans online map generation, visual re-localization, dense visual odometry,
-        stereo matching, object detection and video action recognition.
+        engineering from <a href="https://bit.edu.cn" rel="noopener">Beijing Institute of Technology (北京理工大学)</a>, supervised by
+        <a href="https://guangyugao.weebly.com/" rel="noopener">Prof. Guangyu Gao</a>, co-supervised by <a
+          href="https://www.alexkaiqin.org/" rel="noopener"> Prof. Alex K. Qin</a> and
+        <a href="https://www.linkedin.com/in/lin-sun-3588765a/" rel="noopener">Dr. Lin Sun</a>. My work focuses on AI planning
+        for
+        robotics,
+        visual perception, visual
+        localization, and video understanding.
       </p>
 
       <ul class="linklist">
@@ -91,7 +95,8 @@
   <section class="section" id="news" aria-labelledby="news-title">
     <h2 id="news-title">News</h2>
     <ul class="news">
-    <li><time datetime="2026-09">Sep 2026</time><span>Attending ECCV 2026.</span></li>
+      <li><time datetime="2026-09">Sep 2026</time><span><a href="#hdvo-tiv">HDVO</a> published in <em>IEEE Transactions on
+            Intelligent Vehicles</em>.</span></li>
       <li><time datetime="2026-08">Aug 2026</time><span><a href="#vectorreloc">VectorReLoc</a> accepted at ECCV 2026.</span>
       </li>
     <!-- Older than three years, kept for reference.
@@ -111,27 +116,63 @@
 
     <div class="pub-list">
 
+      <article class="pub" id="hdvo-tiv">
+        <img class="pub__media" src="teasers/HDVO-TIV-2026.png" width="200" height="120" loading="lazy"
+          alt="Framework figure for HDVO: hybrid dense direct visual odometry">
+        <div>
+          <h3 class="pub__title"><a href="projects/hdvo/index.html">HDVO: Hybrid Dense Direct Visual Odometry</a></h3>
+          <p class="pub__authors"><span class="me">Ziming Liu (corresponding author)</span>, Ezio Malis, Philippe Martinet</p>
+          <p class="pub__venue"><em>IEEE Transactions on Intelligent Vehicles</em> &middot; 2026</p>
+          <p class="pub__note">Journal extension of the <a href="#hdvo-iros">IROS 2022</a> and ITSC 2023 papers:
+            stereo depth for metric scale, a robust Huber loss, and STC/LAM binary masks; real-time on Jetson Orin and Thor.
+          </p>
+          <ul class="pub__links">
+            <li><a href="https://ieeexplore.ieee.org/document/11589217" rel="noopener">IEEE Xplore</a></li>
+            <li><a href="projects/hdvo/hdvo_tiv_2026.pdf">PDF</a></li>
+            <li><a href="https://github.com/ziming-liu/HDVO" rel="noopener">Code</a></li>
+            <li><a href="projects/hdvo/index.html">Project page</a></li>
+          </ul>
+          <details class="bibtex">
+            <summary>BibTeX</summary>
+            <pre><code>@article{HDVO-TIV-2026,
+                                                                                                                                                        title     = {HDVO: Hybrid Dense Direct Visual Odometry},
+                                                                                                                                                        author    = {Liu, Ziming and Malis, Ezio and Martinet, Philippe},
+                                                                                                                                                        journal   = {IEEE Transactions on Intelligent Vehicles},
+                                                                                                                                                        volume    = {11},
+                                                                                                                                                        pages     = {930--945},
+                                                                                                                                                        year      = {2026},
+                                                                                                                                                        publisher = {IEEE},
+                                                                                                                                                        doi       = {10.1109/TIV.2026.3708447}
+                                                                                                                                                      }</code></pre>
+          </details>
+        </div>
+      </article>
+
       <article class="pub" id="vectorreloc">
         <img class="pub__media" src="teasers/VectorReLoc-ECCV-2026.png" width="200" height="120" loading="lazy"
              alt="Framework figure for VectorReLoc: vectorized SD map visual re-localization">
         <div>
           <h3 class="pub__title"><a href="projects/vectorreloc/index.html">VectorReLoc: Reliable Vectorized SD Map Visual Re-localization with Contrastive Feature Alignment</a></h3>
-          <p class="pub__authors"><span class="me">Ziming Liu</span> (corresponding author), Quanjie Xiang, Yun Wang,
+          <p class="pub__authors"><span class="me">Ziming Liu (corresponding author)</span>, Quanjie Xiang, Yun Wang,
             Yiting Wang, Wen Chao, Zhuanjian Xu, Leichen Wang, Hao Sun, Guangyu Gao</p>
-          <p class="pub__venue"><em>ECCV 2026</em> · to appear</p>
+          <p class="pub__venue"><em>ECCV 2026</em></p>
           <p class="pub__note">Joint project between Bosch Research and the Bosch Cross-domain Computing
             Solutions (XC) division; deployed in Bosch automated driving products.</p>
           <ul class="pub__links">
+            <li><a href="https://link.springer.com/chapter/10.1007/978-3-032-37092-1_18" rel="noopener">Springer</a></li>
+            <li><a href="https://eccv.ecva.net/virtual/2026/poster/3610" rel="noopener">Poster &amp; video</a></li>
             <li><a href="projects/vectorreloc/final_vectorreloc.pdf">PDF</a></li>
-            <li><a href="projects/vectorreloc/index.html">Details, figures and BibTeX</a></li>
+            <li><a href="projects/vectorreloc/index.html">Project page</a></li>
           </ul>
           <details class="bibtex">
             <summary>BibTeX</summary>
 <pre><code>@inproceedings{vectorreloc-eccv-2026,
   title     = {VectorReLoc: Reliable Vectorized SD Map Visual Re-localization with Contrastive Feature Alignment},
   author    = {Liu, Ziming and Xiang, Quanjie and Wang, Yun and Wang, Yiting and Chao, Wen and Xu, Zhuanjian and Wang, Leichen and Sun, Hao and Gao, Guangyu},
-  booktitle = {European Conference on Computer Vision (ECCV)},
-  year      = {2026}
+  booktitle = {ECCV},
+  year = {2026},
+  publisher = {Springer},
+  doi = {10.1007/978-3-032-37092-1_18}
 }</code></pre>
           </details>
         </div>
@@ -142,12 +183,12 @@
              alt="Visual abstract of the Impromptu VLA dataset and benchmark results">
         <div>
           <h3 class="pub__title"><a href="projects/impromptu-vla/index.html">Impromptu VLA: Open Weights and Open Data for Driving Vision-Language-Action Models</a></h3>
-          <p class="pub__authors">Haohan Chi, Huan-ang Gao, <span class="me">Ziming Liu</span> (corresponding author),
+          <p class="pub__authors">Haohan Chi, Huan-ang Gao, <span class="me">Ziming Liu (corresponding author)</span>,
             Jianing Liu, Chenyu Liu, Jinwei Li, Kaisen Yang, Yangcheng Yu, Zeda Wang, Wenyi Li, Leichen Wang,
             Xingtao Hu, Hao Sun, Hang Zhao, Hao Zhao</p>
           <p class="pub__venue"><em>NeurIPS 2025</em></p>
           <p class="pub__note">Outcome of an industry&ndash;academia collaboration between Bosch Research
-            and Tsinghua University, sponsored by Bosch Research.</p>
+            and Tsinghua University.</p>
           <ul class="pub__links">
             <li><a href="https://arxiv.org/abs/2505.23757" rel="noopener">arXiv</a></li>
             <li><a href="https://impromptu-vla.c7w.tech/" rel="noopener">Official page</a></li>
@@ -224,6 +265,7 @@
           <h3 class="pub__title"><a href="https://hal.science/hal-04210672" rel="noopener">Multi-masks Generation for Increasing Robustness of Dense Direct Methods</a></h3>
           <p class="pub__authors"><span class="me">Ziming Liu</span>, Ezio Malis, Philippe Martinet</p>
           <p class="pub__venue"><em>ITSC 2023</em> · September 2023</p>
+          <p class="pub__note">Extended in <a href="#hdvo-tiv">HDVO</a> (IEEE T-IV 2026).</p>
           <ul class="pub__links">
             <li><a href="https://hal.science/hal-04210672" rel="noopener">PDF</a></li>
           </ul>
@@ -269,13 +311,14 @@
         </div>
       </article>
 
-      <article class="pub">
+      <article class="pub" id="hdvo-iros">
         <img class="pub__media" src="teasers/HDVO-IROS-2022.png" width="200" height="120" loading="lazy"
              alt="Teaser figure for A New Dense Hybrid Stereo Visual Odometry Approach">
         <div>
           <h3 class="pub__title"><a href="https://hal.inria.fr/hal-03935158/file/_paper_iros22_v2%20%282%29.pdf" rel="noopener">A New Dense Hybrid Stereo Visual Odometry Approach</a></h3>
           <p class="pub__authors"><span class="me">Ziming Liu</span>, Ezio Malis, Philippe Martinet</p>
           <p class="pub__venue"><em>IROS 2022</em> · October 2022</p>
+          <p class="pub__note">Extended in <a href="#hdvo-tiv">HDVO</a> (IEEE T-IV 2026).</p>
           <ul class="pub__links">
             <li><a href="https://hal.inria.fr/hal-03935158/file/_paper_iros22_v2%20%282%29.pdf" rel="noopener">PDF</a></li>
             <li><a href="https://doi.org/10.1109/IROS47612.2022.9981814" rel="noopener">DOI</a></li>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HDVO · Ziming Liu</title>
+    <meta name="description"
+        content="HDVO: Hybrid Dense Direct Visual Odometry — a stereo depth network trained end-to-end with the photometric loss of a model-based dense direct visual odometry module, with robust Huber loss and STC/LAM binary masks. IEEE Transactions on Intelligent Vehicles, 2026.">
+    <meta name="author" content="Ziming Liu">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+    <link rel="canonical" href="https://ziming-liu.github.io/projects/hdvo/">
+    <link rel="icon" href="../../teasers/1662551546796.jpeg" type="image/jpeg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="../../js/main.js" defer></script>
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="HDVO: Hybrid Dense Direct Visual Odometry">
+    <meta property="og:description"
+        content="A hybrid visual odometry method combining a stereo depth network with a model-based dense direct visual odometry module. IEEE T-IV 2026.">
+    <meta property="og:image" content="https://ziming-liu.github.io/teasers/HDVO-TIV-2026.png">
+</head>
+
+<body class="page--project">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <nav class="site-nav wrap" aria-label="Primary">
+            <a class="site-nav__brand" href="../../index.html">Ziming Liu</a>
+            <a href="../../index.html#news">News</a>
+            <a href="../../index.html#publications">Publications</a>
+        </nav>
+    </header>
+
+    <main id="main" class="wrap">
+
+        <section class="project-hero">
+            <h1>HDVO: Hybrid Dense Direct Visual Odometry</h1>
+            <p class="project-hero__authors">
+                <a href="../../index.html">Ziming Liu</a><sup>1,2</sup> ·
+                Ezio Malis<sup>1</sup> ·
+                Philippe Martinet<sup>1</sup>
+            </p>
+            <p class="project-hero__meta">
+                <sup>1</sup>Inria, Sophia Antipolis, France
+                <sup>2</sup>Bosch Research, Shanghai, China
+            </p>
+            <p class="project-hero__meta">IEEE Transactions on Intelligent Vehicles, vol. 11, pp. 930&ndash;945, 2026
+            </p>
+            <ul class="linklist">
+                <li><a href="https://ieeexplore.ieee.org/document/11589217" rel="noopener">IEEE Xplore</a></li>
+                <li><a href="https://doi.org/10.1109/TIV.2026.3708447" rel="noopener">DOI</a></li>
+                <li><a href="hdvo_tiv_2026.pdf">PDF</a></li>
+                <li><a href="https://github.com/ziming-liu/HDVO" rel="noopener">Code</a></li>
+                <li><a href="#bibtex">BibTeX</a></li>
+                <li><a href="../../index.html#hdvo-tiv">Publication entry</a></li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <figure class="figure">
+                <img src="figures/framework.png" alt="Structure of hybrid dense direct visual odometry" loading="lazy">
+                <figcaption>Structure of HDVO. A data-based stereo depth network feeds a model-based DDVO module that
+                    refines the relative pose over N iterations. The dense photometric loss is filtered by an occlusion
+                    mask and a texture mask before back-propagating into the depth network. At inference the parts
+                    marked with a snowflake are frozen and only the relative pose is optimised with the second-order
+                    ESM optimiser.</figcaption>
+            </figure>
+        </section>
+
+        <section class="section" aria-labelledby="abstract-title">
+            <h2 id="abstract-title">Abstract</h2>
+            <div class="prose">
+                <p>Dense direct visual odometry (DDVO) is a well-known robust model-based visual odometry method that
+                    computes robot self-localization from visual data. However, obtaining a metric localization requires
+                    depth information, which is unavailable in most applications and especially outdoors. For this
+                    reason we focus on a hybrid dense direct visual odometry (HDVO) that combines a model-based
+                    localization module and a data-based stereo depth estimation module. Since depth is estimated from a
+                    stereo sensor, the proposed HDVO achieves better localization performance than methods using only
+                    monocular RGB data. Moreover, the learning part of HDVO is optimized with the photometric loss of
+                    DDVO without any depth supervision signal.</p>
+                <p>For this loss, occlusion and low texture affect the optimization convergence. This paper investigates
+                    a binary mask based on stereo-temporal consistency to address the occlusion problem, along with
+                    another binary mask based on local patch consistency to solve the low-texture problem. Finally, it
+                    is shown that HDVO achieves a significant advantage in terms of both inference speed and odometry
+                    error on public benchmarks.</p>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="contrib-title">
+            <h2 id="contrib-title">Contributions</h2>
+            <ul class="highlights">
+                <li><strong>Unified model-based and data-based odometry.</strong> A deep stereo depth network and a
+                    classical dense direct visual odometry module are trained end-to-end through a single photometric
+                    loss, without any depth ground truth.</li>
+                <li><strong>Metric scale from stereo.</strong> Stereo depth removes the scale ambiguity of monocular
+                    depth priors, which is what makes the estimated trajectory directly usable across scenarios and
+                    sensors without ground-truth rescaling.</li>
+                <li><strong>Efficient test-time optimization.</strong> Only the pose is optimized at inference, so the
+                    method keeps real-time performance while retaining the generalization benefit of on-line
+                    refinement.</li>
+                <li><strong>Robust loss plus binary masks.</strong> A Huber loss replaces the unstable learned per-pixel
+                    weights, while the STC occlusion mask and the LAM texture mask filter the extreme outliers that
+                    re-weighting alone cannot handle.</li>
+            </ul>
+        </section>
+
+        <section class="section" aria-labelledby="mask-title">
+            <h2 id="mask-title">Why Mask the Photometric Loss</h2>
+            <div class="prose">
+                <p>The dense photometric loss is the matching error between the reference and current frames. Three
+                    kinds of pixels break this matching: occluded pixels that have no correspondence at all, pixels
+                    affected by brightness discrepancy between camera views, and pixels in homogeneous regions that
+                    cannot be distinguished from their neighbours. All three act as outliers during optimization.</p>
+            </div>
+            <figure class="figure mt-lg">
+                <img src="figures/why_mask.png"
+                    alt="Illustration of occlusion, brightness discrepancy and homogeneous texture in the loss matrix"
+                    loading="lazy">
+                <figcaption>Each coloured cell is one pixel of the loss matrix. Occlusion, brightness discrepancy and
+                    homogeneous texture all produce loss values that cannot be driven to zero.</figcaption>
+            </figure>
+
+            <div class="figure-grid mt-lg">
+                <figure class="figure">
+                    <img src="figures/stc_mask_steps.png"
+                        alt="Computation steps of the stereo-temporal consistency occlusion mask" loading="lazy">
+                    <figcaption>STC occlusion mask: a pixel is kept only if it is recovered consistently by both the
+                        stereo warping and the temporal warping of the same reference view.</figcaption>
+                </figure>
+                <figure class="figure">
+                    <img src="figures/lam_texture.png" alt="Local area matching texture mask" loading="lazy">
+                    <figcaption>LAM texture mask: local patch consistency identifies ambiguous low-texture pixels such
+                        as sky, highlights and shadows.</figcaption>
+                </figure>
+            </div>
+
+            <div class="figure-grid mt-lg">
+                <figure class="figure">
+                    <img src="figures/mask_rgb.jpg" alt="Input RGB frame from Virtual KITTI2" loading="lazy">
+                    <figcaption>Input frame</figcaption>
+                </figure>
+                <figure class="figure">
+                    <img src="figures/mask_lam.png" alt="LAM homogeneous texture mask" loading="lazy">
+                    <figcaption>LAM texture mask</figcaption>
+                </figure>
+                <figure class="figure">
+                    <img src="figures/mask_stc.png" alt="STC occlusion mask" loading="lazy">
+                    <figcaption>STC occlusion mask</figcaption>
+                </figure>
+                <figure class="figure">
+                    <img src="figures/mask_multi.png" alt="Combined multi-mask" loading="lazy">
+                    <figcaption>Multi-mask</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="results-title">
+            <h2 id="results-title">Results on KITTI Odometry</h2>
+            <div class="prose">
+                <p>HDVO reaches the lowest translation error among model-based, end-to-end and hybrid methods on KITTI
+                    sequences 09 and 10, while producing trajectories at true metric scale. Most competing hybrid and
+                    learning-based methods report results rescaled with ground-truth odometry, which makes them
+                    unusable as-is for real vehicle localization.</p>
+            </div>
+
+            <div class="table-wrap">
+                <table class="data-table">
+                    <caption class="visually-hidden">KITTI odometry translation and rotation error on sequences 09 and
+                        10</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Method</th>
+                            <th scope="col">seq. 09 t<sub>err</sub> (%)</th>
+                            <th scope="col">seq. 09 r<sub>err</sub> (&deg;/100m)</th>
+                            <th scope="col">seq. 10 t<sub>err</sub> (%)</th>
+                            <th scope="col">seq. 10 r<sub>err</sub> (&deg;/100m)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ORB-SLAM2 (stereo)</td>
+                            <td>0.85</td>
+                            <td>0.26</td>
+                            <td>0.56</td>
+                            <td>0.24</td>
+                        </tr>
+                        <tr>
+                            <td>DVSO</td>
+                            <td>0.83</td>
+                            <td>0.21</td>
+                            <td>0.74</td>
+                            <td>0.21</td>
+                        </tr>
+                        <tr>
+                            <td>D3VO</td>
+                            <td>0.78</td>
+                            <td>&ndash;</td>
+                            <td>0.62</td>
+                            <td>&ndash;</td>
+                        </tr>
+                        <tr>
+                            <td>DF-VO</td>
+                            <td>2.07</td>
+                            <td>0.23</td>
+                            <td>2.06</td>
+                            <td>0.36</td>
+                        </tr>
+                        <tr>
+                            <td>DINO-VO</td>
+                            <td>1.64</td>
+                            <td>0.93</td>
+                            <td>0.96</td>
+                            <td>0.71</td>
+                        </tr>
+                        <tr>
+                            <td>HDVO (IROS 2022)</td>
+                            <td>0.87</td>
+                            <td>0.28</td>
+                            <td>0.87</td>
+                            <td>0.46</td>
+                        </tr>
+                        <tr class="row-ours">
+                            <td>HDVO (ours)</td>
+                            <td>0.73</td>
+                            <td>0.36</td>
+                            <td>0.42</td>
+                            <td>0.24</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="figure-grid mt-lg">
+                <figure class="figure">
+                    <img src="figures/kitti_traj_09.png" alt="Trajectory comparison on KITTI sequence 09"
+                        loading="lazy">
+                    <figcaption>KITTI sequence 09</figcaption>
+                </figure>
+                <figure class="figure">
+                    <img src="figures/kitti_traj_10.png" alt="Trajectory comparison on KITTI sequence 10"
+                        loading="lazy">
+                    <figcaption>KITTI sequence 10</figcaption>
+                </figure>
+            </div>
+
+            <div class="figure-grid mt-lg">
+                <figure class="figure">
+                    <img src="figures/speed_ate_09.png"
+                        alt="Absolute trajectory error versus inference speed on KITTI sequence 09" loading="lazy">
+                    <figcaption>ATE vs. speed</figcaption>
+                </figure>
+                <figure class="figure">
+                    <img src="figures/speed_trans_09.png"
+                        alt="Translation error versus inference speed on KITTI sequence 09" loading="lazy">
+                    <figcaption>Translation error vs. speed</figcaption>
+                </figure>
+                <figure class="figure">
+                    <img src="figures/speed_rot_09.png" alt="Rotation error versus inference speed on KITTI sequence 09"
+                        loading="lazy">
+                    <figcaption>Rotation error vs. speed</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="ablation-title">
+            <h2 id="ablation-title">Effect of the Masks</h2>
+            <div class="prose">
+                <p>Both masks improve depth and pose accuracy, and their combination is consistently the best. Removing
+                    occlusions matters more than removing low-texture regions, but the two are complementary. On
+                    Virtual KITTI2 scene 20 the multi-mask reduces the translation error from 13.90% to 0.95%.</p>
+            </div>
+
+            <div class="table-wrap">
+                <table class="data-table">
+                    <caption class="visually-hidden">Ablation of the STC and LAM masks</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Sequence</th>
+                            <th scope="col">Mask</th>
+                            <th scope="col">abs rel &darr;</th>
+                            <th scope="col">rmse &darr;</th>
+                            <th scope="col">t<sub>err</sub> (%) &darr;</th>
+                            <th scope="col">r<sub>err</sub> (&deg;/100m) &darr;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="4">KITTI 09</td>
+                            <td>none</td>
+                            <td>0.2827</td>
+                            <td>8.414</td>
+                            <td>2.77</td>
+                            <td>0.68</td>
+                        </tr>
+                        <tr>
+                            <td>LAM</td>
+                            <td>0.2535</td>
+                            <td>7.538</td>
+                            <td>2.41</td>
+                            <td>0.71</td>
+                        </tr>
+                        <tr>
+                            <td>STC</td>
+                            <td>0.1042</td>
+                            <td>3.934</td>
+                            <td>2.68</td>
+                            <td>0.81</td>
+                        </tr>
+                        <tr class="row-ours">
+                            <td>multi-mask</td>
+                            <td>0.0665</td>
+                            <td>3.305</td>
+                            <td>1.54</td>
+                            <td>0.45</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="4">Virtual KITTI2 20</td>
+                            <td>none</td>
+                            <td>0.7648</td>
+                            <td>62.14</td>
+                            <td>13.90</td>
+                            <td>3.75</td>
+                        </tr>
+                        <tr>
+                            <td>LAM</td>
+                            <td>0.3273</td>
+                            <td>63.24</td>
+                            <td>5.29</td>
+                            <td>0.87</td>
+                        </tr>
+                        <tr>
+                            <td>STC</td>
+                            <td>0.3298</td>
+                            <td>64.75</td>
+                            <td>1.68</td>
+                            <td>0.76</td>
+                        </tr>
+                        <tr class="row-ours">
+                            <td>multi-mask</td>
+                            <td>0.1284</td>
+                            <td>59.45</td>
+                            <td>0.95</td>
+                            <td>0.46</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="figure-grid mt-lg">
+                <figure class="figure">
+                    <img src="figures/traj_nomask.png" alt="Estimated trajectory without any mask" loading="lazy">
+                    <figcaption>No mask</figcaption>
+                </figure>
+                <figure class="figure">
+                    <img src="figures/traj_lam.png" alt="Estimated trajectory with the LAM texture mask" loading="lazy">
+                    <figcaption>LAM mask</figcaption>
+                </figure>
+                <figure class="figure">
+                    <img src="figures/traj_stc.png" alt="Estimated trajectory with the STC occlusion mask"
+                        loading="lazy">
+                    <figcaption>STC mask</figcaption>
+                </figure>
+                <figure class="figure">
+                    <img src="figures/traj_multi.png" alt="Estimated trajectory with the combined multi-mask"
+                        loading="lazy">
+                    <figcaption>Multi-mask</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="speed-title">
+            <h2 id="speed-title">Inference Cost</h2>
+            <div class="prose">
+                <p>Measured with the plain PyTorch implementation using the CoEx stereo backbone. HDVO stays real-time
+                    on embedded platforms, with room for further acceleration through ONNX or TensorRT.</p>
+            </div>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <caption class="visually-hidden">Inference time of HDVO on different platforms</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Platform</th>
+                            <th scope="col">Time (ms) &darr;</th>
+                            <th scope="col">FPS &uarr;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>NVIDIA A40</td>
+                            <td>21.06</td>
+                            <td>47.5</td>
+                        </tr>
+                        <tr>
+                            <td>NVIDIA L40</td>
+                            <td>26.67</td>
+                            <td>37.5</td>
+                        </tr>
+                        <tr>
+                            <td>Jetson Orin</td>
+                            <td>80.89</td>
+                            <td>12.4</td>
+                        </tr>
+                        <tr>
+                            <td>Jetson Thor</td>
+                            <td>55.97</td>
+                            <td>17.9</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="generalization-title">
+            <h2 id="generalization-title">Generalization</h2>
+            <div class="prose">
+                <p>Beyond ground vehicles, HDVO is evaluated on two drone datasets: Mid-Air, where depth reaches beyond
+                    1000&nbsp;m, and EuRoC MAV, which combines fast motion with a short stereo baseline. The dynamic
+                    and weather experiments are zero-shot: the model is trained on KITTI Odometry and evaluated on
+                    Virtual KITTI2 without fine-tuning.</p>
+            </div>
+
+            <div class="figure-grid mt-lg">
+                <figure class="figure">
+                    <img src="figures/drone_midair.png" alt="Odometry results on the Mid-Air drone dataset"
+                        loading="lazy">
+                    <figcaption>Mid-Air</figcaption>
+                </figure>
+                <figure class="figure">
+                    <img src="figures/drone_euroc.png" alt="Odometry results on the EuRoC MAV drone dataset"
+                        loading="lazy">
+                    <figcaption>EuRoC MAV</figcaption>
+                </figure>
+            </div>
+
+            <div class="figure-grid mt-lg">
+                <figure class="figure">
+                    <img src="figures/dynamic_s20.png"
+                        alt="Zero-shot trajectory on Virtual KITTI2 scene 20 with many moving vehicles" loading="lazy">
+                    <figcaption>Scene 20 &mdash; 77 dynamic objects</figcaption>
+                </figure>
+                <figure class="figure">
+                    <img src="figures/dynamic_s02.png" alt="Zero-shot trajectory on Virtual KITTI2 scene 02"
+                        loading="lazy">
+                    <figcaption>Scene 02 &mdash; low dynamic activity</figcaption>
+                </figure>
+            </div>
+
+            <div class="table-wrap mt-lg">
+                <table class="data-table">
+                    <caption class="visually-hidden">Relative pose error on Virtual KITTI2 scene 20 under different
+                        weather conditions</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Weather</th>
+                            <th scope="col">RPE trans. (m) &darr;</th>
+                            <th scope="col">RPE rot. (&deg;) &darr;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Base</td>
+                            <td>0.170</td>
+                            <td>0.051</td>
+                        </tr>
+                        <tr>
+                            <td>Fog</td>
+                            <td>0.204</td>
+                            <td>0.066</td>
+                        </tr>
+                        <tr>
+                            <td>Morning</td>
+                            <td>0.177</td>
+                            <td>0.046</td>
+                        </tr>
+                        <tr>
+                            <td>Overcast</td>
+                            <td>0.183</td>
+                            <td>0.044</td>
+                        </tr>
+                        <tr>
+                            <td>Rain</td>
+                            <td>0.191</td>
+                            <td>0.048</td>
+                        </tr>
+                        <tr>
+                            <td>Sunset</td>
+                            <td>0.173</td>
+                            <td>0.041</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="figure-grid mt-lg">
+                <figure class="figure">
+                    <img src="figures/weather_fog.png" alt="Trajectory under fog on Virtual KITTI2 scene 20"
+                        loading="lazy">
+                    <figcaption>Fog</figcaption>
+                </figure>
+                <figure class="figure">
+                    <img src="figures/weather_rain.png" alt="Trajectory under rain on Virtual KITTI2 scene 20"
+                        loading="lazy">
+                    <figcaption>Rain</figcaption>
+                </figure>
+                <figure class="figure">
+                    <img src="figures/weather_sunset.png" alt="Trajectory at sunset on Virtual KITTI2 scene 20"
+                        loading="lazy">
+                    <figcaption>Sunset</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="prior-title">
+            <h2 id="prior-title">Earlier Conference Versions</h2>
+            <div class="prose">
+                <p>This journal article extends two conference papers: the IROS 2022 paper that introduced stereo depth
+                    to fix the scale problem of the depth prior, and the ITSC 2023 paper that proposed the rule-based
+                    mask generation module.</p>
+                <ul class="linklist">
+                    <li><a href="https://doi.org/10.1109/IROS47612.2022.9981814" rel="noopener">A New Dense Hybrid
+                            Stereo Visual Odometry Approach (IROS 2022)</a></li>
+                    <li><a href="https://hal.science/hal-04210672" rel="noopener">Multi-masks Generation for Increasing
+                            Robustness of Dense Direct Methods (ITSC 2023)</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="bibtex" aria-labelledby="bibtex-title">
+            <h2 id="bibtex-title">BibTeX</h2>
+            <div class="prose">
+                <details class="bibtex" open>
+                    <summary>BibTeX</summary>
+                    <pre><code>@article{HDVO-TIV-2026,
+  title     = {HDVO: Hybrid Dense Direct Visual Odometry},
+  author    = {Liu, Ziming and Malis, Ezio and Martinet, Philippe},
+  journal   = {IEEE Transactions on Intelligent Vehicles},
+  volume    = {11},
+  pages     = {930--945},
+  year      = {2026},
+  publisher = {IEEE},
+  doi       = {10.1109/TIV.2026.3708447}
+}</code></pre>
+                </details>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="ack-title">
+            <h2 id="ack-title">Acknowledgements</h2>
+            <div class="prose">
+                <p>This project was funded by 3IA Côte d'Azur, Université Côte d'Azur (Nice, France), and was carried
+                    out at Inria.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer wrap">
+        <p>&copy; <span id="year">2026</span> Ziming Liu</p>
+        <p><a href="../../index.html#publications">All publications</a></p>
+    </footer>
+
+</body>
+
+</html>
